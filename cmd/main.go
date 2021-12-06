@@ -16,7 +16,7 @@ type responsePayload struct {
 }
 
 const port = ":8080"
-const RandomText = "Hello World"
+const RandomText = "Hello World 11"
 
 const (
 	FailedToParseAccountID               = "Couldn't parse the accountId, make sure it's an integer!"
