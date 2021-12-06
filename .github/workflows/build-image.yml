@@ -12,7 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    uses:
     steps:
       - uses: actions/checkout@v2
 
