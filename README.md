@@ -19,8 +19,10 @@ For packaging app into container
 ## Project file structure
  **/cmd**
 Main code for this project.
+
 **/build**
 Packaging and Cloud Build file for CI/CD
+
 **/deployments**
 Terraform files
 
