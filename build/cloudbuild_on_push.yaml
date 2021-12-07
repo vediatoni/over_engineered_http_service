@@ -18,6 +18,8 @@ steps:
       - "-c"
       - |-
         echo $COMMIT_SHA > ./deployments/app_version.txt
+        git config --global user.email "antonio.jelic@vediagames.com"
+        git config --global user.name "Antonio Jelic"
         git add -A
         git commit -m "Update app version to $COMMIT_SHA"
         git push
