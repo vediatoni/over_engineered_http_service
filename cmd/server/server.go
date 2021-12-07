@@ -20,7 +20,7 @@ type Server struct {
 }
 
 type responsePayload struct {
-	AccountID int       `json:"accountId"`
+	AccountID int64       `json:"accountId"`
 	Timestamp time.Time `json:"timestamp"`
 	Data      string    `json:"data"`
 }
@@ -53,7 +53,7 @@ func (s *Server) accountId(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("accountId: %s\n", accountId)
 
 	// convert string to int
-	accountIdInt, err := strconv.Atoi(accountId)
+	accountIdInt, err := strconv.ParseInt(accountId, 10, 64)
 	if err != nil {
 		fmt.Println(err)
 		http.Error(w, FailedToParseAccountID, http.StatusBadRequest)
