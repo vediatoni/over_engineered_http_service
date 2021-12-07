@@ -13,14 +13,15 @@ import (
 )
 
 func TestRun(t *testing.T) {
-	svc := new(port)
+	svc := new(getPort())
 
 	serviceRunning := make(chan struct{})
 	serviceDone := make(chan struct{})
 	go func() {
 		close(serviceRunning)
 		if err := svc.run(); err != http.ErrServerClosed && err != nil {
-			t.Fatalf("failed to run service: %v", err)
+			t.Errorf("failed to run service: %v", err)
+			return
 		}
 		defer close(serviceDone)
 	}()
@@ -47,7 +48,7 @@ func TestRun(t *testing.T) {
 }
 
 func TestService_NumHandlerFails(t *testing.T) {
-	svc := new(port)
+	svc := new(getPort())
 
 	type response struct {
 		res        string
@@ -94,7 +95,7 @@ func TestService_NumHandlerFails(t *testing.T) {
 }
 
 func TestService_NumHandler(t *testing.T) {
-	svc := new(port)
+	svc := new(getPort())
 
 	type response struct {
 		res        *responsePayload
