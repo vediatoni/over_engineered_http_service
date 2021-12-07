@@ -5,3 +5,4 @@ admin-svc-acc.json
 deployments/.terraform
 *.lock.hcl
 bustling-dynamo-334410-9c9fffc71846.json
+*.lock.info
