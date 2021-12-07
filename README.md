@@ -35,8 +35,9 @@ Terraform files
 4. Move the json auth file to the root path of this project 
 5. Connect repository to the Cloud Build > trigger  
 6. Create `deployments/terraform.tfvars` file and make sure to configure these variables: *artifact_registry, project, organization, credentials_file* use `deployments/variables.tf` as a reference
-7. Run terraform apply  
-8. Run Cloud Build trigger (via GUI or git push event)
+7. Update `./build/cloudbuild_on_push.yaml` substitutions *_REPO_NAME, _URL* correctly
+8. Run terraform apply  
+9. Run Cloud Build trigger (via GUI or git push event)
 
 ## Extra
 **To run tests**
