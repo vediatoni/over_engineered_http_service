@@ -1,30 +1,30 @@
 ## Service url: https://app-oehs-qs4uvgfbba-uc.a.run.app
 ## Tech stack 
 **Go v1.17.3**
-The main http service is coded in Go.
+the main http service is coded in Go.
 
 **Google Cloud Platform - GCP**
-For infrastructure: 
+for infrastructure: 
  - [Cloud Build for CI/CD](https://www.google.com/search?q=cloud%20build&oq=cloud%20build&aqs=edge..69i57j69i59l4j0i512j69i60l3.2358j0j4&sourceid=chrome&ie=UTF-8) 
  - [Cloud Run for running the service](https://cloud.google.com/run) 
  - [Artifact Registry for storing container images](https://cloud.google.com/artifact-registry)
  - [Kaniko for building container images via Cloud Build](https://github.com/GoogleContainerTools/kaniko)
 
 **Terraform**
-For infrastructure provisioning on GCP
+for infrastructure provisioning on GCP
 
 **Dockerfile**
-For packaging app into container
+for packaging app into container
 
 ## Project file structure
  **/cmd**
-Main code for this project.
+main code for this project.
 
 **/build**
-Packaging and Cloud Build file for CI/CD
+packaging and Cloud Build file for CI/CD
 
 **/deployments**
-Terraform files
+terraform files
 
 [You can read more about the structure here](https://github.com/golang-standards/project-layout)
 
