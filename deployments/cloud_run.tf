@@ -6,7 +6,7 @@ resource "google_cloud_run_service" "app" {
   template {
     spec {
       containers {
-        image = "${var.container_registry_url}/oehs:${var.app_version}"
+        image = "${var.container_registry_url}/oehs:${file("app_version.txt")}"
       }
     }
   }

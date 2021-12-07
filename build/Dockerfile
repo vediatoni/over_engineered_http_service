@@ -5,11 +5,11 @@ COPY go.* ./
 RUN go mod download
 
 # Copy local code to the container image.
-COPY ./cmd ./cmd
+COPY ./cmd/server ./cmd/server
 
 # Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
-WORKDIR /app/cmd
+WORKDIR /app/cmd/server
 RUN CGO_ENABLED=0 GOOS=linux go build -mod=readonly -v -o /app/server
 
 FROM alpine

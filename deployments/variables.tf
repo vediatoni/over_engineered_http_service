@@ -13,7 +13,7 @@ variable "container_registry_url" {
 }
 
 variable "app_version" {
-  default = "latest"
+  default = ""
 }
 
 variable "project" {

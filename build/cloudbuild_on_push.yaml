@@ -1,6 +1,6 @@
 steps:
   - name: 'golang'
-    args: ['go','test','cmd/']
+    args: ['go','test','./cmd/server/']
   - name: "gcr.io/kaniko-project/executor:v1.6.0"
     args:
       - --destination=$_URL/$PROJECT_ID/$_REPO_NAME/oehs:$COMMIT_SHA
