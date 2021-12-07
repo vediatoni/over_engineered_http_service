@@ -13,5 +13,5 @@ steps:
       - |-
         gcloud run deploy app-oehs --image=$_URL/$PROJECT_ID/$_REPO_NAME/oehs:$COMMIT_SHA --region=us-central1 --allow-unauthenticated
 substitutions:
-  _REPO_NAME: over-engineered-http-service
+  _REPO_NAME: test
   _URL: us-central1-docker.pkg.dev
