@@ -51,6 +51,12 @@ func (s *Server) healthCheck(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) accountId(w http.ResponseWriter, r *http.Request) {
 	tmp := strings.Split(r.URL.RequestURI(), "/")
+	if len(tmp) < 3 {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("Hello"))
+		return
+	}
+
 	accountId := tmp[1]
 	fmt.Printf("accountId: %s\n", accountId)
 

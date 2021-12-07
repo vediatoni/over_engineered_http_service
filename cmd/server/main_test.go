@@ -69,7 +69,7 @@ func TestCustomPort(t *testing.T) {
 	<-serviceDone
 }
 
-func TestService_NumHandlerFails(t *testing.T) {
+func TestService_Custom(t *testing.T) {
 	svc := new(getPort())
 
 	type response struct {
@@ -82,11 +82,19 @@ func TestService_NumHandlerFails(t *testing.T) {
 		expect  *response
 	}{
 		{
-			name:    "Test 3",
+			name:    "Test 1",
 			request: "/NOOOO/data",
 			expect: &response{
 				res:        FailedToParseAccountID,
 				statusCode: http.StatusBadRequest,
+			},
+		},
+		{
+			name:    "Test 2",
+			request: "/",
+			expect: &response{
+				res:        "Hello",
+				statusCode: http.StatusOK,
 			},
 		},
 	}
