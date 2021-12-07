@@ -1,0 +1,5 @@
+admin-svc-acc.json
+*.tfstate
+*.tfvars
+*.tfstate.backup
+deployments/.terraform

@@ -1,0 +1,25 @@
+steps:
+  - name: 'golang'
+    args: ['go','test','cmd/']
+  - name: "gcr.io/kaniko-project/executor:v1.6.0"
+    args:
+      - --destination=$_URL/$PROJECT_ID/$_REPO_NAME/oehs:$COMMIT_SHA
+      - --cache=true
+      - --dockerfile=build/Dockerfile
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |-
+        gcloud run services update o --image=$_URL/$PROJECT_ID/$_REPO_NAME/oehs:$COMMIT_SHA --region=us-central1
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:alpine'
+    entrypoint: 'bash'
+    args:
+      - "-c"
+      - |-
+        echo $COMMIT_SHA > deployments/app_version.txt
+        git commit -am "Update app version to $COMMIT_SHA" deployments/app_version.txt
+        git push
+substitutions:
+  _REPO_NAME: over-engineered-http-service
+  _URL: us-central1-docker.pkg.dev
