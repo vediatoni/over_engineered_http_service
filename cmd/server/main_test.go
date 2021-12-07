@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -28,20 +28,42 @@ func TestRun(t *testing.T) {
 
 	<-serviceRunning
 
-	resp, err := http.Get(fmt.Sprintf("http://localhost%v/healtz", svc.httpServer.Addr))
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	err := svc.httpServer.Shutdown(ctx)
 	if err != nil {
-		t.Fatalf("failed to get healthz: %v", err)
+		t.Fatalf("failed to shutdown server: %v", err)
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		t.Fatalf("healthz status code is not OK: %v", resp.StatusCode)
+	<-serviceDone
+}
+
+func TestCustomPort(t *testing.T) {
+	os.Setenv("PORT", "8086")
+	svc := new(getPort())
+
+	serviceRunning := make(chan struct{})
+	serviceDone := make(chan struct{})
+	go func() {
+		close(serviceRunning)
+		if err := svc.run(); err != http.ErrServerClosed && err != nil {
+			t.Errorf("failed to run service: %v", err)
+			return
+		}
+		defer close(serviceDone)
+	}()
+
+	<-serviceRunning
+
+	if svc.httpServer.Addr != ":8086" {
+		t.Errorf("failed to set custom port")
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	err = svc.httpServer.Shutdown(ctx)
+	err := svc.httpServer.Shutdown(ctx)
 	if err != nil {
-		t.Fatalf("failed to shutdown server: %v", err)
+		t.Errorf("failed to shutdown server: %v", err)
 	}
 
 	<-serviceDone
@@ -161,5 +183,20 @@ func TestService_NumHandler(t *testing.T) {
 				t.Fatalf("expected %v, got %v", testCase.expect.res.Data, response.Data)
 			}
 		})
+	}
+}
+
+func TestService_HealthCheck(t *testing.T) {
+	r := httptest.NewRequest("GET", "/healtz", nil)
+	w := httptest.NewRecorder()
+
+	svc := new(getPort())
+
+	svc.healthCheck(w, r)
+	resp := w.Result()
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK{
+		t.Fatalf("Expected %v status code but got %v", http.StatusOK, resp.StatusCode)
 	}
 }

@@ -20,7 +20,7 @@ type Server struct {
 }
 
 type responsePayload struct {
-	AccountID int64       `json:"accountId"`
+	AccountID int64     `json:"accountId"`
 	Timestamp time.Time `json:"timestamp"`
 	Data      string    `json:"data"`
 }
@@ -40,11 +40,13 @@ func (s *Server) run() error {
 func (s *Server) handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", s.accountId)
-	mux.HandleFunc("/healtz", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("OK"))
-	})
+	mux.HandleFunc("/healtz", s.healthCheck)
 	return mux
+}
+
+func (s *Server) healthCheck(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("OK"))
 }
 
 func (s *Server) accountId(w http.ResponseWriter, r *http.Request) {
