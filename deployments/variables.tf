@@ -12,10 +12,6 @@ variable "container_registry_url" {
   default = "gcr.io/vediatoni"
 }
 
-variable "app_version" {
-  default = ""
-}
-
 variable "project" {
   type    = object({
     name = string
