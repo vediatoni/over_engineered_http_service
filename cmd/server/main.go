@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const RandomText = "Something new"
+const RandomText = "Ola!"
 
 func main() {
 
