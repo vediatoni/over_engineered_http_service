@@ -34,7 +34,6 @@ variable "gcp_service_list" {
   description = "The list of all GCP API's necessary for this project"
   type        = list(string)
   default     = [
-    "cloudresourcemanager.googleapis.com",
     "iam.googleapis.com",
     "cloudbuild.googleapis.com",
     "run.googleapis.com",

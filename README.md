@@ -30,12 +30,13 @@ Terraform files
 
 ## Instructions
 1. Create a project on GCP  
-2. Create a service account on GCP (IAM) and download json auth keys for this account *(make sure to give it the right permissions- **Editor, Project IAM Admin**)*  
-3. Move the json auth file to the root path of this project 
-4. Connect repository to the Cloud Build > trigger  
-5. Create `deployments/terraform.tfvars` file and make sure to configure these variables: *artifact_registry, project, organization, credentials_file* use `deployments/variables.tf` as a reference
-6. Run terraform apply  
-7. Run Cloud Build trigger (via GUI or git push event)
+2. [Enable Cloud Resource Manager API](https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com)
+3. Create a service account on GCP (IAM) and download json auth keys for this account *(make sure to give it the right permissions- **Editor, Project IAM Admin**)*  
+4. Move the json auth file to the root path of this project 
+5. Connect repository to the Cloud Build > trigger  
+6. Create `deployments/terraform.tfvars` file and make sure to configure these variables: *artifact_registry, project, organization, credentials_file* use `deployments/variables.tf` as a reference
+7. Run terraform apply  
+8. Run Cloud Build trigger (via GUI or git push event)
 
 ## Extra
 **To run tests**
