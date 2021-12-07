@@ -17,8 +17,8 @@ steps:
     args:
       - "-c"
       - |-
-        echo $COMMIT_SHA > deployments/app_version.txt
-        git commit -am "Update app version to $COMMIT_SHA" deployments/app_version.txt
+        echo $COMMIT_SHA > ./deployments/app_version.txt
+        git commit -am "Update app version to $COMMIT_SHA" ./deployments/app_version.txt
         git push
 substitutions:
   _REPO_NAME: over-engineered-http-service

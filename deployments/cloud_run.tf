@@ -26,6 +26,6 @@ resource "google_cloud_run_service" "app" {
   depends_on                 = [
     google_project_service.gcp_services,
     google_cloudbuild_trigger.push,
-    google_artifact_registry_repository.artifact-registry-repo
+    google_artifact_registry_repository.artifact-registry-repo,
   ]
 }
