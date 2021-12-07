@@ -8,10 +8,6 @@ variable "zone" {
   default = "us-central1-c"
 }
 
-variable "container_registry_url" {
-  default = "gcr.io/vediatoni"
-}
-
 variable "project" {
   type    = object({
     name = string
