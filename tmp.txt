@@ -1,4 +1,5 @@
 1. Create a project on GCP
-2. Create a svcacc on GCP and download json auth keys for this account (make sure to give it the right permissions- Editor)
+2. Create a svcacc on GCP and download json auth keys for this account (make sure to give it the right permissions- Editor, Project IAM Admin)
 3. Connect repository to the Cloud Build > trigger
 4. Run terraform apply
+5. Run Cloud Build trigger

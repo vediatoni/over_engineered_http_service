@@ -3,3 +3,4 @@ admin-svc-acc.json
 *.tfvars
 *.tfstate.backup
 deployments/.terraform
+*.lock.hcl
